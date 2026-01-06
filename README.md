@@ -8,10 +8,10 @@ This reposity is a collection of out-of-tree opt passes - based on **LLVM-21**.
 
 **llvm-opt-tutor** is a collection of self-contained reference LLVM passes especially those passes for optimization. It's a tutorial that targets novice and aspiring LLVM developers like me. All passes are organized in the following manner :
 
-- **🎯[Motivation]:** Why do we need this optimization?
-- **🛠️[Toy Implementation]:** How does the algorithm work in its simplest form?
-- **🔍[Debug & Analysis]:**How do we verify and observe the transformation?
-- **⚙️[LLVM Internals]:**How do the pros do it?
+- 🎯 **[Motivation]:** Why do we need this optimization?
+- 🛠️ **[Toy Implementation]:** How does the algorithm work in its simplest form?
+- 🔍 **[Debug & Analysis]:** How do we verify and observe the transformation?
+- ⚙️ **[LLVM Internals]:** How do the pros do it?
 
 ## Table of Contents
 
