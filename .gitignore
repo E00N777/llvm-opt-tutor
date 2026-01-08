@@ -40,3 +40,7 @@
 
 #build directories
 build/
+
+.cache/
+# JSON files
+*.json
