@@ -17,7 +17,17 @@ This reposity is a collection of out-of-tree opt passes - based on **LLVM-21**.
 
 - Development Environment
 - **Part 1:** Canonicalization & Cleanup
-  - **Module 1.1:** Mem2Reg & SROA 
+  - **Module 1.1**: Dead Code Elimination
+  - **Module 1.x:** Mem2Reg & SROA 
 - **Part 2:** Scalar Optimization 
 - **Part 3:** Loop Optimizations
 - **Part 4:** IPO & Advanced
+
+## Development Environment
+
+// To do
+
+## Canonicalization & Cleanup
+
+### Dead Code Elimination
+

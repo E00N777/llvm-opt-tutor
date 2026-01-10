@@ -1,8 +1,12 @@
 set(
     LLVM_OPT_TUTOR_PLUGINS
+    ToyDCE
     ToyMem2Reg
 )
 
+
+set(ToyDCE_SOURCES
+  ToyDCE.cpp)
 set(ToyMem2Reg_SOURCES
   ToyMem2Reg.cpp)
 
