@@ -1,19 +1,67 @@
 #include "ToyMem2Reg.h"
 #include "llvm/Passes/PassPlugin.h"
 #include "llvm/Passes/PassBuilder.h"
+#include "llvm/IR/PassManager.h"
+#include "llvm/IR/Dominators.h"
+#include "llvm/IR/Function.h"
+#include "llvm/Analysis/AssumptionCache.h"
+#include <vector> 
 
-
+using namespace llvm;
 
 #define  DEBUG_TYPE "toy-mem2reg"
 
-
-
-llvm::PreservedAnalyses ToyMem2Reg::run(llvm::Function &F,
-                                        llvm::FunctionAnalysisManager &FAM)
+static bool ifAllocacanPromote(AllocaInst &AI)
 {
-    bool Finashed = runOnFunction(F);
+  
+    return true;
+}
 
-    return (Finashed ? llvm::PreservedAnalyses::none()
+static void TranslateMemToReg(std::vector<AllocaInst*> &AllocaList,
+                             llvm::Function &F)
+{
+    //TO DO
+}
+
+static bool runOnFunction(llvm::Function &F, llvm::DominatorTree &DT,
+                            llvm::AssumptionCache &AC){
+    bool Changed = false;
+    std::vector<llvm::AllocaInst*> Alloca;
+
+    for(auto &BB : F)
+    {
+        for(auto & Inst : BB)
+        {
+            if(AllocaInst * AI= dyn_cast<AllocaInst>(&Inst))
+            {
+                if(ifAllocacanPromote(*AI))
+                {
+                    Alloca.push_back(AI);
+                }
+            }
+               
+        }
+
+        if(Alloca.empty()){break;}
+
+        TranslateMemToReg(Alloca, F);
+        Changed = true;
+      
+    }
+
+
+    return Changed;
+}
+
+PreservedAnalyses ToyMem2Reg::run(Function &F,
+                                    llvm::FunctionAnalysisManager &FAM)
+{
+    auto &DT = FAM.getResult<DominatorTreeAnalysis>(F);
+    auto &AC = FAM.getResult<AssumptionAnalysis>(F);
+
+    bool Finished = runOnFunction(F, DT, AC);
+
+    return (Finished ? llvm::PreservedAnalyses::none()
                      : llvm::PreservedAnalyses::all());
 }
 
